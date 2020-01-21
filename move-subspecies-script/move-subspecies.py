@@ -24,7 +24,9 @@ def CapcomBlowfishEncrypt(file, key):
     return endianness_reversal(cipher.encrypt(endianness_reversal(file)))
 
 file_keys = {
-    ".dtt":"hZ2H0gvUA4xIELjPoCIKefoCUFK9D77aPQvL9goKDpFbC2U2yhTRhWJG"
+    ".shlp"     :"FZoS8QLyOyeFmkdrz73P9Fh2N4NcTwy3QQPjc1YRII5KWovK6yFuU8SL",
+    ".dtt_epg"  :"sJV4g7d55gKnQB5nS6XJ9pZ1qZmmQwNnSbidUW1OeAhHrpPd6MKbfsrt",
+    ".dtt_eda"  :"Fqkpg1xx1cMlvg3AtKOCLxFgVFBwHkCbjizBRV49hWmEe5lOAaNOTm7m",
 }
 
 def move_subspecies(monster_path : str, old_variant_id : int, new_variant_id : int):
@@ -39,6 +41,7 @@ def move_subspecies(monster_path : str, old_variant_id : int, new_variant_id : i
         if not os.path.isfile(filename): 
             continue
         aob = open(filename, 'rb').read()
+        print(filename)
         if (os.path.splitext(filename)[1] in file_keys):
             aob = CapcomBlowfish(aob, file_keys[os.path.splitext(filename)[1]])
         replacements = [
